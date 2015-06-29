@@ -18,13 +18,17 @@ public class Main {
     private static LibraryRemote libRemote;
 
     public static void main(String[] args) {
+        // Alterar persistence, pois esta drop and create
+        
         libRemote.addBook(1L, "Testando titulo", "Abril", 010101, 2, "Victor");
-        libRemote.addBook(2, "Como ficar monstro em duas refeições.", "Monster gym", 010102, 1, "Gleidson");
+        libRemote.addBook(2, "Como ficar monstro em duas refeições", "Monster gym", 010102, 1, "Gleidson");
         System.out.println(libRemote.findBookByAuthor("Victor"));
         libRemote.updateBook(1L, "Título novo2", "Abril", 010101, 2, "Gleidson");
+        System.out.println("Todos os livros:");
         System.out.println(libRemote.findAllBooks());
-//        libRemote.deleteBook(2);
-//        libRemote.findAllBooks();
+        libRemote.deleteBook(010101);
+        libRemote.deleteBookByTitle("Como ficar monstro em duas refeições");
+        libRemote.findAllBooks();
     }
     
 }

@@ -82,12 +82,25 @@ public class Library implements LibraryRemote {
 //    }
 
     @Override
-    public boolean deleteBook(long codigo) {
+    public boolean deleteBook(long isbn) {
         DAOBook daoBook = new DAOBook(em);
-        Book bookToUpdate = daoBook.findBookByCode(codigo);
+        Book bookToUpdate = daoBook.findBookByIsbn(isbn);
         
         if (bookToUpdate != null) {
             daoBook.remove(bookToUpdate);
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+    
+    @Override
+    public boolean deleteBookByTitle(String titulo) {
+        DAOBook daoBook = new DAOBook(em);
+        Book book = daoBook.findBookByTitle(titulo);
+        if (book != null) {
+            daoBook.remove(book);
             return true;
         }
         else {
@@ -155,7 +168,8 @@ public class Library implements LibraryRemote {
         int i = 1;
         if(books != null) {
             for (Book b : books) {
-                retrievedBooks += i + b.toString();
+                retrievedBooks += i + " - " + b.toString();
+                i++;
             }
             return retrievedBooks;
         }

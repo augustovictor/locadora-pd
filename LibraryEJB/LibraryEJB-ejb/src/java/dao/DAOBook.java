@@ -60,7 +60,7 @@ public class DAOBook extends DAO<Book> {
     
     public Book findBookByIsbn(long isbn) {
         try {
-            Query q = getManager().createQuery("SELECT b FROM Book b WHERE b.isbn = '" + isbn + "'");
+            Query q = getManager().createQuery("SELECT b FROM Book b WHERE b.isbn = " + isbn);
             return (Book) q.getSingleResult();
         } catch (PersistenceException e) {
             return null;
