@@ -85,6 +85,7 @@ public class Main {
                     
                     System.out.println("------ Qual a edição? ------");
                     edicao = keyboard.nextInt();
+                    keyboard.nextLine();
                     
                     System.out.println("------ Quem é o(a) autor(a)? ------");
                     autor = keyboard.nextLine();
@@ -97,6 +98,36 @@ public class Main {
                     
                 // OPTION 2 - UPDATE BOOK
                 case 2:
+                    System.out.println("------ Opção 2 selecionada - Atualizar livro ------");
+                    System.out.println("Você deve informar o código do livro a ser atualizado:");
+                    codigo = keyboard.nextLong();
+                    
+                    System.out.println("------ Qual será o novo título? ------");
+                    keyboard.nextLine();
+                    titulo = keyboard.nextLine();
+
+                    System.out.println("------ E quanto à nova editora? ------");
+                    editora = keyboard.nextLine();
+
+                    System.out.println("------ Qual o novo ISBN? ------");
+                    isbn = keyboard.nextLong();
+
+                    System.out.println("------ Qual a nova edição? ------");
+                    edicao = keyboard.nextInt();
+                    keyboard.nextLine();
+
+                    System.out.println("------ Quem é o(a) novo(a) autor(a)? ------");
+                    autor = keyboard.nextLine();
+
+                    // Ex: libRemote.updateBook(2, "Título monstro atualizado", "Abril", 4162L, 2, "Monstro")
+                    if(libRemote.updateBook(codigo, titulo, editora, isbn, edicao, autor)) {
+                        System.out.println("Livro com código " + codigo + " atualizado com sucesso! Este é o novo registro do livro:");
+                        System.out.println(libRemote.findBookByTitle(titulo));
+
+                    }
+                    else System.out.println("Ocorreu um erro durante a atualização do livro com código: " + codigo);
+
+                    
                 break;
                     
                 // OPTION 3 - REMOVE BOOK
@@ -120,18 +151,53 @@ public class Main {
                     
                 // OPTION 5 - SEARCH BOOK
                 case 5:
+                    System.out.println("------ Opção 5 selecionada - Procurar livro ------");
+                    System.out.println("------ Como deseja pesquisar livros? ------");
+                    System.out.println("------------ 1 - Pesquisar por título");
+                    System.out.println("------------ 2 - Pesquisar por autor");
+                    System.out.println("------------ 3 - Pesquisar por isbn");
+                    
+                    option = keyboard.nextInt();
+                    keyboard.nextLine();
+                    
+                    switch(option) {
+                        case 1:
+                            System.out.println("------ Pesquisar por livro com o seguinte título: ");
+                            titulo = keyboard.nextLine();
+                            System.out.println(libRemote.findBookByTitle(titulo));
+                        break;
+                            
+                        case 2:
+                            System.out.println("------ Pesquisar por livro com o seguinte autor: ");
+                            autor = keyboard.nextLine();
+                            System.out.println(libRemote.findBookByAuthor(autor));
+                        break;
+                            
+                        case 3:
+                            System.out.println("------ Pesquisar por livro com o seguinte isbn: ");
+                            isbn = keyboard.nextLong();
+                            System.out.println(libRemote.findBookByIsbn(isbn));
+                        break;
+                    }
+                    
+                    
                 break;
                     
                 // OPTION 6 - VERIFY AMOUNT OF SEARCHES
                 case 6:
+                    System.out.println("------ Opção 6 selecionada - Exibir quantidade de pesquisas já realizadas ------");
+                    keyboard.nextLine();
+                    System.out.println(libRemote.qtdSearch());
                 break;
                     
                 // OPTION 7 - SHOW MENU OPTIONS
                 case 7:
+                    System.out.println("------ Opção 7 selecionada - Exibir menu ------");
                 break;
                     
                 // OPTION 8 - 
                 
+                    
                 // OPTION 9 - 
             }
         }

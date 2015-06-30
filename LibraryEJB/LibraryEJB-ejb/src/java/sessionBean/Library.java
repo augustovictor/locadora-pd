@@ -66,25 +66,6 @@ public class Library implements LibraryRemote {
         }
     }
     
-//    @Override // Update find by title. Use when changing code
-//    public boolean updateBook(String titulo, long newCodigo, String newEditora, long newIsbn, int newEdicao, String newAutor) {
-//        DAOBook daoBook = new DAOBook(em);
-//        Book bookToUpdate = daoBook.findBookByTitle(titulo);
-//        if (bookToUpdate != null) {
-//            bookToUpdate.setTitulo(titulo);
-//            bookToUpdate.setCodigo(newCodigo);
-//            bookToUpdate.setEditora(newEditora);
-//            bookToUpdate.setIsbn(newIsbn);
-//            bookToUpdate.setEdicao(newEdicao);
-//            bookToUpdate.setAutor(newAutor);
-//            daoBook.merge(bookToUpdate);
-//            return true;
-//        }
-//        else {
-//            return false;
-//        }
-//    }
-
     @Override
     public boolean deleteBook(long isbn) {
         DAOBook daoBook = new DAOBook(em);
