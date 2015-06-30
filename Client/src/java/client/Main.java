@@ -23,7 +23,7 @@ public class Main {
         libRemote.addBook(1, "Testando titulo", "Abril", 4161L, 2, "Victor");
         libRemote.addBook(2, "Como ficar monstro em duas refeições", "Monster gym", 4162L, 1, "Gleidson");
         libRemote.addBook(3, "Lataria nova", "Editora Carro", 4163L, 1, "Victor");
-        libRemote.addBook(4, "Ficando grande", "Monster gym", 4164L, 1, "Mama");
+        libRemote.addBook(4, "Lataria nova2", "Editora Carro", 4164L, 2, "Mama");
         System.out.println("Livros by Victor");
         System.out.println(libRemote.findBookByAuthor("Victor"));
         libRemote.updateBook(2, "Título novo2", "Abril", 4162L, 2, "Gleidson");
@@ -39,12 +39,14 @@ public class Main {
         System.out.println(libRemote.findBookByIsbn(4161));
         
         System.out.println("Books by title");
-        System.out.println(libRemote.findBookByTitle("Ficando grande"));
+        System.out.println(libRemote.findBookByTitle("Editora Carro"));
         
-        libRemote.deleteBookByTitle("Ficando grande"); // Delete by title
+        libRemote.deleteBookByTitle("Editora Carro"); // Delete by title
         
-         System.out.println("Todos os livros apos remover \"Ficando grande\":");
+        System.out.println("Todos os livros apos remover \"Editora Carro\":");
         System.out.println(libRemote.findAllBooks()); // List all books
+        
+        System.out.println(libRemote.qtdSearch());
     }
     
 }

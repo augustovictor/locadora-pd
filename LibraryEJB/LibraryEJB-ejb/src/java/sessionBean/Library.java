@@ -7,6 +7,7 @@ package sessionBean;
 
 import dao.DAOBook;
 import java.util.List;
+import javax.ejb.EJB;
 import javax.ejb.Stateful;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -21,6 +22,9 @@ public class Library implements LibraryRemote {
 
     @PersistenceContext(name = "Library_PU")
     EntityManager em;
+    
+    @EJB
+    CounterLocal searchCounter;
     
     @Override
     public boolean addBook(long codigo, String titulo, String editora, long isbn, int edicao, String autor) {
@@ -113,6 +117,7 @@ public class Library implements LibraryRemote {
         DAOBook daoBook = new DAOBook(em);
         Book book = daoBook.findBookByCode(codigo);
         if (book != null) {
+            searchCounter.increaseCounter();
             return book.toString();
         }
         else {
@@ -125,10 +130,11 @@ public class Library implements LibraryRemote {
         DAOBook daoBook = new DAOBook(em);
         Book book = daoBook.findBookByTitle(titulo);
         if (book != null) {
+            searchCounter.increaseCounter();
             return book.toString();
         }
         else {
-            return "Nenhum livro com titulo: " + titulo + " foi encontrado";
+            return "O livro pesquisado com o título: " + titulo + " não foi encontrado.";
         }
     }
 
@@ -140,6 +146,7 @@ public class Library implements LibraryRemote {
         int i = 1;
         if (books != null) {
             for (Book b : books) {
+                searchCounter.increaseCounter();
                 retrievedBooks += i + " - " + b.toString();
                 i++;
             }
@@ -155,14 +162,15 @@ public class Library implements LibraryRemote {
         DAOBook daoBook = new DAOBook(em);
         Book book = daoBook.findBookByIsbn(isbn);
         if (book != null) {
+            searchCounter.increaseCounter();
             return book.toString();
         }
         return "Nenhum livro com isbn: " + isbn + " foi encontrado";
     }
 
     @Override
-    public int counter() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public String qtdSearch() {
+        return "Numero de consultas realizadas no sistema: " + searchCounter.getSequence();
     }
 
     @Override
@@ -173,6 +181,7 @@ public class Library implements LibraryRemote {
         int i = 1;
         if(books != null) {
             for (Book b : books) {
+                searchCounter.increaseCounter();
                 retrievedBooks += i + " - " + b.toString();
                 i++;
             }
