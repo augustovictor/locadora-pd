@@ -193,4 +193,19 @@ public class Library implements LibraryRemote {
         
     }
     
+    @Override
+    public String showMenu() {
+		String menu = "-------------M--E--N--U-------------\n";
+                menu += "0 - Sair;\n";
+		menu += "1 - Adicionar livro \n";
+		menu += "2 - Atualizar livro; \n"; // Por Código
+		menu += "3 - Remover livro;\n"; // Por isbn
+                menu += "4 - Listar todos os livros;\n";
+		menu += "5 - Pesquisar livro;\n"; // Por título, autor, isbn
+		menu += "6 - Verificar quantidade de consultas;\n";
+		menu += "7 - MENU;\n";
+		menu += "-------------------------------------------";
+		return menu;
+	}
+    
 }

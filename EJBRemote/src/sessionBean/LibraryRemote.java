@@ -29,7 +29,8 @@ public interface LibraryRemote {
     public String findBookByIsbn(long isbn);
     
     
-    public String qtdSearch(); 
+    public String qtdSearch();
+    public String showMenu();
    
     // Missing msg(String msg);
 }
