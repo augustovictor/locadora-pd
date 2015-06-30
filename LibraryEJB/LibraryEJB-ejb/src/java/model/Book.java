@@ -104,11 +104,11 @@ public class Book implements Serializable {
     @Override
     public String toString() {
         /**
-         * Código: 123 - Título | Autor: Victor
+         * Código: 123 - Título | Autor: Victor | ISBN: 5420
          * -- Editora: Abril [Edição: 01]
          * -----------------------------------
          */
-        return "Código: " + this.getCodigo() + " - Título: " + this.getTitulo() +  " | Autor: " + this.getAutor() + " \n" + 
+        return "Código: " + this.getCodigo() + " - Título: " + this.getTitulo() +  " | Autor: " + this.getAutor() +  " | ISBN: " + this.getIsbn() + " \n" + 
                "-- Editora: " + this.getEditora() + "[Edição: " + this.getEdicao() + "]" +
                 "\n-----------------------------------\n";
     }

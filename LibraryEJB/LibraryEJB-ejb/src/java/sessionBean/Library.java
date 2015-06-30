@@ -128,7 +128,7 @@ public class Library implements LibraryRemote {
             return book.toString();
         }
         else {
-            return "O livro pesquisado com o título: " + titulo + " não foi encontrado.";
+            return "Nenhum livro com titulo: " + titulo + " foi encontrado";
         }
     }
 
@@ -152,7 +152,12 @@ public class Library implements LibraryRemote {
 
     @Override
     public String findBookByIsbn(long isbn) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        DAOBook daoBook = new DAOBook(em);
+        Book book = daoBook.findBookByIsbn(isbn);
+        if (book != null) {
+            return book.toString();
+        }
+        return "Nenhum livro com isbn: " + isbn + " foi encontrado";
     }
 
     @Override
