@@ -18,7 +18,6 @@ import javax.ejb.Remote;
 public interface LibraryRemote {
     public boolean addBook(long codigo, final String titulo, final String editora, final long isbn, final int edicao, final String autor);
     public boolean updateBook(long codigo, String newTitulo, String newEditora, long newIsbn, int newEdicao, String newAutor);
-//    public boolean updateBook(String titulo, long newCodigo, String newEditora, long newIsbn, int newEdicao, String newAutor);
     public boolean deleteBook(long isbn);
     public boolean deleteBookByTitle(String titulo);
     
@@ -32,5 +31,4 @@ public interface LibraryRemote {
     public String qtdSearch();
     public String showMenu();
    
-    // Missing msg(String msg);
 }

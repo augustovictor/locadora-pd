@@ -32,7 +32,7 @@ public class Library implements LibraryRemote {
     @Override
     public boolean addBook(long codigo, String titulo, String editora, long isbn, int edicao, String autor) {
         DAOBook daoBook = new DAOBook(em);
-        if (daoBook.findBookByTitle(titulo) == null) {
+        if (daoBook.findBookByTitle(titulo) == null && daoBook.findBookByIsbn(isbn) == null) {
             Book bookToUpdate = new Book();
             bookToUpdate.setCodigo(codigo);
             bookToUpdate.setTitulo(titulo);
@@ -197,5 +197,4 @@ public class Library implements LibraryRemote {
 		menu += "-------------------------------------------";
 		return menu;
 	}
-    
 }

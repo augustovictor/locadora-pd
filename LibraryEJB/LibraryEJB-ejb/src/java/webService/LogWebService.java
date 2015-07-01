@@ -3,35 +3,42 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package sessionBean;
+package webService;
 
 import dao.DAOLog;
 import java.util.List;
-import javax.ejb.Stateless;
+import javax.ejb.EJB;
 import javax.jws.WebService;
+import javax.ejb.Stateless;
+import javax.jws.Oneway;
+import javax.jws.WebMethod;
+import javax.jws.WebParam;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import model.Log;
+import sessionBean.LoggerLocal;
 
 /**
  *
  * @author victoraweb
  */
-@WebService(serviceName = "LogWebService")
-@Stateless
-public class Logger implements LoggerRemote, LoggerLocal {
 
+@Stateless()
+public class LogWebService {
+    
     @PersistenceContext(name = "Library_PU")
-    private EntityManager em;
+    EntityManager em;
+    
+    @EJB
+    private LoggerLocal ejbRef;
 
-    @Override
-    public void newLog(String action) {
-        Log log = new Log();
-        log.createAction(action);
-        em.persist(log);
+    @WebMethod(operationName = "newLog")
+    @Oneway
+    public void newLog(@WebParam(name = "action") String action) {
+        ejbRef.newLog(action);
     }
-
-    @Override
+    
+    @WebMethod(operationName = "logsList")
     public String logsList() {
         DAOLog daoLog = new DAOLog(em);
         List<Log> logs = daoLog.logsList();
@@ -45,4 +52,5 @@ public class Logger implements LoggerRemote, LoggerLocal {
         }
         else return "Não há logs no sistema ainda.";
     }
+    
 }

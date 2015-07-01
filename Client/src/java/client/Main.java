@@ -33,29 +33,60 @@ public class Main {
             
             switch(option) {
                 
+                // OPTION - EXIT SYSTEM
+                case 0:
+                    System.out.println("------ Opção 0 selecionada - Sair do sistema ------");
+                    System.out.println("------ Volte sempre =). ------");
+                    System.exit(0);
+                break;
+                
                 // OPTION 1 - ADD BOOK
                 case 1:
                     System.out.println("------ Opção 1 selecionada - Adicionar livro ------");
                     System.out.println("------ Insira primeiramente o código de identificação do livro: ------");
                     codigo = keyboard.nextLong();
-                    
                     keyboard.nextLine();
+
+                    // TITULO
+                    do {
+                        System.out.println("------ Qual será o título? ------");
+                        titulo = keyboard.nextLine();
+                        if(!titulo.isEmpty()) break;
+                        System.out.println("Valor inválido!");
+                    }while(titulo.isEmpty());
                     
-                    System.out.println("------ Qual será o título? ------");
-                    titulo = keyboard.nextLine();
                     
-                    System.out.println("------ E quanto à editora? ------");
-                    editora = keyboard.nextLine();
+                    // EDITORA
+                    do {
+                        System.out.println("------ Qual a editora? ------");
+                        editora = keyboard.nextLine();
+                        if(!editora.isEmpty()) break;
+                        System.out.println("Valor inválido!");
+                    }while(editora.isEmpty());
                     
-                    System.out.println("------ Qual o ISBN? ------");
-                    isbn = keyboard.nextLong();
                     
+                    // ISBN
+                    do {
+                        System.out.println("------ Qual o ISBN? ------");
+                        isbn = keyboard.nextLong();
+                        if(isbn != 0) break;
+                        System.out.println("Valor inválido!");
+                    }while(isbn != 0);
+                    
+                    // EDICAO
                     System.out.println("------ Qual a edição? ------");
                     edicao = keyboard.nextInt();
                     keyboard.nextLine();
                     
-                    System.out.println("------ Quem é o(a) autor(a)? ------");
-                    autor = keyboard.nextLine();
+                    
+                    // AUTOR
+                    do {
+                        System.out.println("------ Qual o(a) autor(a)? ------");
+                        autor = keyboard.nextLine();
+                        if(!autor.isEmpty()) break;
+                        System.out.println("Valor inválido!");
+                    }while(autor.isEmpty());
+                    
                     
                     if (libRemote.addBook(codigo, titulo, editora, isbn, edicao, autor)) 
                         System.out.println("Livro \"" + titulo + "\" cadastrado com sucesso!");
@@ -102,6 +133,7 @@ public class Main {
                     System.out.println("------ Opção 3 selecionada - Remover livro [] ------");
                     System.out.println("Insira o isbn do livro a ser removido:");
                     isbn = keyboard.nextLong();
+                    // TODO this.validEntry(isbn);
                     keyboard.nextLine();
                     
                     if(libRemote.deleteBook(isbn))
@@ -161,12 +193,18 @@ public class Main {
                 case 7:
                     System.out.println("------ Opção 7 selecionada - Exibir menu ------");
                 break;
-                    
-                // OPTION 8 - 
                 
-                    
-                // OPTION 9 - 
+                default:
+                    System.out.println("Opção inválida. Escolha uma opção novamente/n");
+                break;
             } // End switch
         } // End while
     } // End main()
+    
+    public String validEntry(String value) {
+        if (value.equals("") || value.equals(" ") || value == null) 
+            return "Entre com um valor válido.";
+        else 
+            return null;
+    }
 } // End Main
