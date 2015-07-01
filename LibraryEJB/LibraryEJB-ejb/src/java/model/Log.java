@@ -23,20 +23,26 @@ public class Log implements Serializable {
     @GeneratedValue
     private int id;
     private String action;
-    private Date date;
+    private String date;
     
     public String getAction() {
         return action;
     }
     
-    public void setAction() {
-        
+    public void createAction(String action) {
+        this.action = action;
+        this.date = this.getDateTime();
     }
     
-    public static String getDateTime() {
+    public String getDateTime() {
         Date now = new Date();
         SimpleDateFormat simpleFormat = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
         return simpleFormat.format(now);
+    }
+    
+    @Override
+    public String toString() {
+        return "Id[" + this.id + "] | Data: " + this.date + " | Log: " + this.action + "\n";
     }
     
 }

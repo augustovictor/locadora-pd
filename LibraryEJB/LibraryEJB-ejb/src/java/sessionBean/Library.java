@@ -26,6 +26,9 @@ public class Library implements LibraryRemote {
     @EJB
     CounterLocal searchCounter;
     
+    @EJB
+    LoggerLocal logger;
+    
     @Override
     public boolean addBook(long codigo, String titulo, String editora, long isbn, int edicao, String autor) {
         DAOBook daoBook = new DAOBook(em);
@@ -39,9 +42,11 @@ public class Library implements LibraryRemote {
             bookToUpdate.setAutor(autor);
             
             daoBook.persist(bookToUpdate);
+            logger.newLog("Livro cadastrado com sucesso. Código do livro: " + codigo + ". Título do livro: " + titulo);
             return true;
         }
         else {
+            logger.newLog("Erro ao cadastrar livro com código: " + codigo + " e  título : " + titulo);
             return false;
         }
     }
@@ -59,9 +64,11 @@ public class Library implements LibraryRemote {
             bookToUpdate.setAutor(newAutor);
             
             daoBook.merge(bookToUpdate);
+            logger.newLog("Livro atualizado com sucesso. Código do livro: " + codigo + ".");
             return true;
         }
         else {
+            logger.newLog("Erro ao tentar atualizar livro com código: " + codigo + ".");
             return false;
         }
     }
@@ -73,9 +80,11 @@ public class Library implements LibraryRemote {
         
         if (bookToUpdate != null) {
             daoBook.remove(bookToUpdate);
+            logger.newLog("Livro removido com sucesso. Isbn do livro removido: " + isbn + ".");
             return true;
         }
         else {
+            logger.newLog("Erro ao tentar remover o livro com isbn: " + isbn + ".");
             return false;
         }
     }
